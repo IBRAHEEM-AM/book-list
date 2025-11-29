@@ -2,7 +2,7 @@ from fastapi import FastAPI, HTTPException
 
 app = FastAPI()
 
-# "מסד נתונים" בזיכרון
+# מסד נתונים "בזיכרון"
 books = []
 counter = 1
 
@@ -23,9 +23,11 @@ def add_book(book: dict):
     new_book = {
         "id": counter,
         "title": book.get("title"),
-        "author": book.get("author")
+        "author": book.get("author"),
+        "year": book.get("year")
+
     }
-        books.append(new_book)
+    books.append(new_book)
     counter += 1
     return new_book
 
@@ -36,3 +38,4 @@ def delete_book(book_id: int):
             books.remove(book)
             return {"message": "Book deleted"}
     raise HTTPException(status_code=404, detail="Book not found")
+
